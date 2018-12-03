@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TableroActivity"></activity>
+        <activity android:name=".TableroActivity" android:screenOrientation="landscape" />
+        <activity android:name=".InstruActivity"/>
     </application>
 
 </manifest>
