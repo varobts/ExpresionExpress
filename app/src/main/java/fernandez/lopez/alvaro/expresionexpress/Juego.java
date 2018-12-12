@@ -19,6 +19,10 @@ public class Juego {
         Codigo = codigo;
     }
 
+    public String getPalabra() {
+        return Palabra;
+    }
+
     public void setPalabra(String palabra) {
         Palabra = palabra;
     }
