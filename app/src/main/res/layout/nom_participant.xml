@@ -7,15 +7,16 @@
     android:layout_height="?android:listPreferredItemHeight">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nomview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:gravity="center_vertical"
         android:text="TextView"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
