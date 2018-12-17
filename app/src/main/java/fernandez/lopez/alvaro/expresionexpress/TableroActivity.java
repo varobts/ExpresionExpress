@@ -2,6 +2,9 @@ package fernandez.lopez.alvaro.expresionexpress;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
+import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +25,7 @@ public class TableroActivity extends AppCompatActivity {
 
     private List<String> palabras;
     private TextView Eq1View, Eq2View, Pos1View, Pos2View, Turno1View, Turno2View, PalabraView;
-    private Button Pasa_btn;
+    private Button Pasa_btn, Tiempo_btn;
     private int jug1=0, jug2=0;
 
 //Variable per a saber quantes paraules portem (NOMÉS en aquesta versió 0.0.2)
@@ -49,6 +52,7 @@ public class TableroActivity extends AppCompatActivity {
         Turno2View = findViewById(R.id.Turno2View);
         PalabraView = findViewById(R.id.PalabraView);
         Pasa_btn = findViewById(R.id.Pasa_btn);
+        Tiempo_btn = findViewById(R.id.Tiempo_btn);
 
         Eq1View.setText("Equipo 1:\n" + equipo1.getNom());
         Eq2View.setText("Equipo 2:\n" + equipo2.getNom());
@@ -61,22 +65,52 @@ public class TableroActivity extends AppCompatActivity {
 
 
         Pasa_btn.setEnabled(false);
+        Tiempo_btn.setEnabled(true);
 
 
     }
 
     public void onClickPasa (View view){
         //Si s'ha acabat de ronda, avança una casella a l'equip corresponent
-        if(FiRonda==5){
+        /*if(FiRonda==5){
             casellaSeguent();
             if(equipo1.getCasilla()==7 || equipo2.getCasilla()==7) finalJoc();
         }
-        else nouTorn();
+        else */
+        nouTorn();
     }
 
     public void onClickTiempo (View view){
+        Tiempo_btn.setEnabled(false);
         novaParaula();
         Pasa_btn.setEnabled(true);
+        Random random = new Random();
+        int comp1aPart = random.nextInt(61) + 20;
+        final int comp2aPart = (int) (comp1aPart*0.2);
+        new CountDownTimer((comp1aPart-comp2aPart)*1000, 1000) {
+            ToneGenerator tone = new ToneGenerator(AudioManager.STREAM_ALARM, 50);
+            public void onTick(long millisUntilFinished) {
+                //Afegir pitidito
+                tone.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 100);
+            }
+
+            public void onFinish() {
+                new CountDownTimer(comp2aPart*1000,500){
+                    public void onTick(long millisUntilFinished){
+                        //Afegir pitidito
+                        tone.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 100);
+                    }
+                    public void onFinish(){
+                        //Pitidito de final
+                        tone.startTone(ToneGenerator.TONE_PROP_NACK, 400);
+                        casellaSeguent();
+                        Tiempo_btn.setEnabled(true);
+                        if(equipo1.getCasilla()==7 || equipo2.getCasilla()==7) finalJoc();
+                    }
+                }.start();
+
+            }
+        }.start();
     }
 
     private void novaParaula() {
