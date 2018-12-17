@@ -16,7 +16,6 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Christian"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PartTitView" />
 
@@ -30,7 +29,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Equipo 1"
         android:textColor="@color/TituloLila"
         android:textSize="40sp"
         android:textStyle="bold"

@@ -19,12 +19,14 @@ import java.util.List;
 
 public class EquipoActivity extends AppCompatActivity {
 
+    private static final int TABLERO = 0;
     private RecyclerView PartListView;
-    private EditText NomEquipView;
-    private EditText nomParticipantView;
+    private EditText NomEquipView, nomParticipantView;
+    private TextView EquipoView;
     private Equipo equipo1,equipo2;
     private List<String> jugadors;
     private Adapter adapter;
+    private boolean estoy1=true; //Flag que me dice si estoy editando los parametros del equipo 1 o 2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class EquipoActivity extends AppCompatActivity {
 
         PartListView = findViewById(R.id.PartListView);
         NomEquipView = findViewById(R.id.NomEquipView);
+        EquipoView = findViewById(R.id.EquipoView);
+        EquipoView.setText("Equipo 1:");
         nomParticipantView = findViewById(R.id.nomParticipantView);
 
         jugadors=new ArrayList<>();
@@ -45,14 +49,41 @@ public class EquipoActivity extends AppCompatActivity {
 
     public void onClickPlus(View view) {
 
-    jugadors.add(nomParticipantView.getText().toString());
+        jugadors.add(nomParticipantView.getText().toString());
         adapter.notifyItemInserted(jugadors.size() - 1);
-
+        nomParticipantView.setText("");
 
     }
 
     public void OnClickNext(View view) {
-        equipo1=new Equipo(NomEquipView.getText().toString(), 1,jugadors);
+        if(estoy1) {
+            equipo1=new Equipo(NomEquipView.getText().toString(), 1,jugadors);
+            estoy1=false;
+            //Llama a un metodo que sea NuevoEquipo, este metodo me resetea todos los valores
+            NuevoEquipo();
+        }
+        else {
+            equipo2=new Equipo(NomEquipView.getText().toString(), 2,jugadors);
+            estoy1=true;
+            LlamaTableroActivity();
+        }
+    }
+
+    public void LlamaTableroActivity(){
+        Intent intent = new Intent(this, TableroActivity.class);
+        intent.putExtra("Equipo1",equipo1);
+        intent.putExtra("Equipo2",equipo2);
+        startActivity(intent);
+
+    }
+
+    public void NuevoEquipo(){
+        EquipoView.setText("Equipo 2:");
+        NomEquipView.setText("");
+        nomParticipantView.setText("");
+        int i = jugadors.size();
+        adapter.notifyItemRangeRemoved(0, i);
+        jugadors = new ArrayList<>();
     }
 
 

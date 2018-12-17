@@ -1,8 +1,9 @@
 package fernandez.lopez.alvaro.expresionexpress;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Equipo {
+public class Equipo implements Serializable {
     String Nom;
     int Num, Casilla;
     List<String> Jugadors;

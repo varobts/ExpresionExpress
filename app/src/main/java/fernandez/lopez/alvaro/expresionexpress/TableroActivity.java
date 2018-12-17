@@ -32,18 +32,9 @@ public class TableroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablero);
-//Omplim el model amb valors de prova
-        List<String> jugadors1 = new ArrayList<>();
-        jugadors1.add("Christian");
-        jugadors1.add("Alvaro");
-        jugadors1.add("Alex");
-        List<String> jugadors2 = new ArrayList<>();
-        jugadors2.add("Dani");
-        jugadors2.add("Judith");
-        jugadors2.add("Lola");
 
-        equipo1 = new Equipo("EQUIP1",1,jugadors1);
-        equipo2 = new Equipo("EQUIP2",2,jugadors2);
+        equipo1 = (Equipo) getIntent().getExtras().getSerializable("Equipo1");
+        equipo2 = (Equipo) getIntent().getExtras().getSerializable("Equipo2");
         juego = new Juego("Codi");
 
         palabras = new ArrayList<>();
