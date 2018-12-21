@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -24,6 +25,8 @@ public class TableroActivity extends AppCompatActivity {
 
 
     private List<String> palabras;
+    private List<Integer> indicePalabras;   //Lista para saber qué índices hemos cogido de Lista palabras
+
     private TextView Eq1View, Eq2View, Pos1View, Pos2View, Turno1View, Turno2View, PalabraView;
     private Button Pasa_btn, Tiempo_btn;
     private int jug1=0, jug2=0;
@@ -41,6 +44,7 @@ public class TableroActivity extends AppCompatActivity {
         juego = new Juego("Codi");
 
         palabras = new ArrayList<>();
+        indicePalabras = new ArrayList<>();
         rellenaPalabras();
 
 //Referenciem als objectes necessaris de la pantalla
@@ -116,13 +120,13 @@ public class TableroActivity extends AppCompatActivity {
     private void novaParaula() {
         //Només serveix per a incialitzar la ronda
         Random random = new Random();
-        int i = random.nextInt(palabras.size());
-        juego.setPalabra(palabras.get(i));
+        int i = random.nextInt(indicePalabras.size());  //Se usa 'indicePalabras' porque es la que indica qué índices quedan aún por usar
+        juego.setPalabra(palabras.get(indicePalabras.get(i)));  //Cogemos el índice que corresponde en 'indicePalabras'
         PalabraView.setText(juego.getPalabra());
         //Para que no se repitan palabras
-        palabras.remove(i);
+        indicePalabras.remove(i);
         //Cuando nos quedamos sin palabras rellenamos 'palabras' de nuevo
-        if(palabras.size()<1) rellenaPalabras();
+        if(indicePalabras.size()<1) rellenaPalabras();
     }
 
     private void nouTorn() {
@@ -183,13 +187,14 @@ public class TableroActivity extends AppCompatActivity {
     }
 
     public void rellenaPalabras (){
-        palabras.add("HOLA");
-        palabras.add("OLA");
-        palabras.add("COCHE");
-        palabras.add("EXPRESSION EXPRESS");
-        palabras.add("CAMINO");
-        palabras.add("ORDENADOR");
-        palabras.add("PRUEBA");
+        //Rellenamos 'palabras' con el recurso 'words'
+        String[] words = getResources().getStringArray(R.array.words);
+        palabras = Arrays.asList(words);
+
+        //Rellenamos 'indicePalabras' con los índices de 'palabras'
+        for (int i = 0; i < palabras.size(); i++){
+            indicePalabras.add(i);
+        }
     }
 
     private DialogInterface.OnClickListener resetLayout() {

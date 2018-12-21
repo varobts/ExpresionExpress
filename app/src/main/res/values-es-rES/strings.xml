@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Expresion Express</string>
+
+    <array name="words">
+        <item>Palabra 1</item>
+        <item>Palabra 2</item>
+        <item>Palabra 3</item>
+        <item>Paraula 4</item>
+        <item>Paraula 5</item>
+        <item>Paraula 6</item>
+    </array>
+
+</resources>

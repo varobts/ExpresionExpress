@@ -4,4 +4,15 @@
 Els jugadors formen 2 equips i s’asseuen intercaladament, és a dir, si hi ha l’equip A i l’equip B, es col·loquen ABABAB... Al començament de cada ronda, es posa en marxa un cronòmetre (amb un temps aleatori) i l’integrant de l’equip que té el torn comença a definir la paraula que li ha tocat. Una vegada la resta de l’equip l’ha encertada, el jugador que definia la paraula passa el torn (en el joc original un disc, en l’aplicació serà el mòbil en joc local) al jugador que té al costat (tal i com estan asseguts, serà de l’altre equip) i llavors és l’altre equip el que li toca endevinar la paraula. Tot continua així fins que s’acaba el temps. En quan això passa, l’equip que tenia el torn de definició perd la ronda i, llavors, l’altre equip és qui avança una casella de les 7 que hi ha al tauler. En la següent ronda, l’equip que comença a definir la paraula és l’equip que ha perdut la que s’estava jugant.
 El joc continua així fins que un dels dos equips arriba a l’última casella, fet que indica que aquest és el guanyador.
 </string>
+
+
+    <array name="words">
+        <item>Paraula 1</item>
+        <item>Paraula 2</item>
+        <item>Paraula 3</item>
+        <item>Paraula 4</item>
+        <item>Paraula 5</item>
+        <item>Paraula 6</item>
+    </array>
+
 </resources>

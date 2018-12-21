@@ -49,9 +49,11 @@ public class EquipoActivity extends AppCompatActivity {
 
     public void onClickPlus(View view) {
 
-        jugadors.add(nomParticipantView.getText().toString());
-        adapter.notifyItemInserted(jugadors.size() - 1);
-        nomParticipantView.setText("");
+        if(!nomParticipantView.getText().toString().equals("")) {   //Si no s'ha introduit cap nom, no facis res
+            jugadors.add(nomParticipantView.getText().toString());
+            adapter.notifyItemInserted(jugadors.size() - 1);
+            nomParticipantView.setText("");
+        }
 
     }
 
