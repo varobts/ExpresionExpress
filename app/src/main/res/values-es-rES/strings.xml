@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Expresion Express</string>
+    <!--INSTRUCCIONES-->
+    <string name="instruccionesTit">Instrucciones:</string>
+    <string name="instrucciones">“Expresion Express” es un juego de mesa del año 1996 de la marca MB
+        Juegos que consiste en adivinar palabras a partir de la descripción que se hace de estas sin
+         poder decir ninguna de la misma familia.
+        Los jugadores forman 2 equipos y se sientan intercaladamente, es decir, si hay el equipo A y
+         el equipo B, se colocan ABABAB... Al principio de cada ronda, se pone en marcha un cronómet
+        ro(con un tiempo aleatorio) y el integrante del equipo que tiene el turno empieza a definir
+        la palabra que le ha tocado. Una vez el resto del equipo la acierta, el jugador que definía
+        la palabra pasa el turno (en el juego original un disco, en la aplicación será el móvil en j
+        uego local) al jugador que tiene a su lado (tal y como están sentados, será del otro equipo)
+         y entonces es el otro equipo al que le toca adivinar la palabra. Todo continúa así hasta qu
+        e se acaba el tiempo. En cuando esto pasa, el equipo que tenía el turno de definición pierde
+         la ronda y, entonces, el otro equipo es quien avanza una casilla de las 7 que hay en el tab
+        lero. En la siguiente ronda, el equipo que empieza a definir la palabra es el equipo que ha
+        perdido la que se estaba jugando.
+        El juego continúa así hasta que uno de los dos equipos llega a la última casilla, hecho que
+        indica que este es el ganador.
+    </string>
+    <!--EQUIPO ACTIVITY-->
+    <string name="equipo1">Equipo 1</string>    <!--Tambien en TABLERO-->
+    <string name="equipo2">Equipo 2</string>    <!--Tambien en TABLERO-->
+    <string name="participantes">Participantes</string>
+    <string name="siguiente">Siguiente</string> <!--Tambien en TABLERO-->
+    <string name="faltaEquipo">Falta nombre del equipo</string>
+    <string name="faltaParticipantes">Falta añadir participantes</string>
 
+    <!--TABLERO ACTIVITY-->
+    <string name="posicion">Posición</string>
+    <string name="turno">Turno</string>
+    <string name="tiempo">Tiempo</string>
+    <string name="pasa">Pasa</string>
+    <string name="gana">Ha ganado el equipo </string>
+    <string name="fin">FIN DEL JUEGO</string>
+    <string name="repite">Vuelve a jugar</string>
+    <string name="acaba">Acaba</string>
+
+
+
+    <!--LISTA PALABRAS-->
     <array name="words">
         <item>Palabra 1</item>
         <item>Palabra 2</item>
         <item>Palabra 3</item>
-        <item>Paraula 4</item>
-        <item>Paraula 5</item>
-        <item>Paraula 6</item>
+        <item>Palabra 4</item>
+        <item>Palabra 5</item>
+        <item>Palabra 6</item>
     </array>
 
 </resources>

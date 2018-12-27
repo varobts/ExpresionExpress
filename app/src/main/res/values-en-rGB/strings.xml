@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Expresion Express</string>
-<!--INSTRUCCIONES-->
-    <string name="instruccionesTit">Instruccions:</string>
+    <!--INSTRUCCIONES-->
+    <string name="instruccionesTit">Instructions:</string>
     <string name="instrucciones">“Expresion Express” és un joc de taula de l’any 1996 de la marca MB
         Juegos que consisteix en endevinar paraules a partir de la descripció que se’n fa d’aquestes
         sense poder-ne dir cap de la seva mateixa família.
@@ -18,34 +19,35 @@
         El joc continua així fins que un dels dos equips arriba a l’última casella, fet que indica q
         ue aquest és el guanyador.
     </string>
-<!--EQUIPO ACTIVITY-->
-    <string name="equipo1">Equip 1</string>    <!--Tambien en TABLERO-->
-    <string name="equipo2">Equip 2</string>    <!--Tambien en TABLERO-->
-    <string name="participantes">Participants</string>
-    <string name="siguiente">Següent</string> <!--Tambien en TABLERO-->
-    <string name="faltaEquipo">Falta nom de l\'equip</string>
-    <string name="faltaParticipantes">Falta afegir participants</string>
 
-<!--TABLERO ACTIVITY-->
-    <string name="posicion">Posició</string>
-    <string name="turno">Torn</string>
-    <string name="tiempo">Temps</string>
-    <string name="pasa">Passa</string>
-    <string name="gana">Ha guanyat l\'equip </string>
-    <string name="fin">FINAL DEL JOC</string>
-    <string name="repite">Torna a jugar</string>
-    <string name="acaba">Acaba</string>
+    <!--EQUIPO ACTIVITY-->
+    <string name="equipo1">Team 1</string>    <!--Tambien en TABLERO-->
+    <string name="equipo2">Team 2</string>    <!--Tambien en TABLERO-->
+    <string name="participantes">Players</string>
+    <string name="siguiente">Next</string>    <!--Tambien en TABLERO-->
+    <string name="faltaEquipo">Write the team name</string>
+    <string name="faltaParticipantes">Add players</string>
+
+    <!--TABLERO ACTIVITY-->
+    <string name="posicion">Position</string>
+    <string name="turno">Turn</string>
+    <string name="tiempo">Time</string>
+    <string name="pasa">Pass</string>
+    <string name="gana">Winner: team </string>
+    <string name="fin">GAME FINISHED</string>
+    <string name="repite">Play again</string>
+    <string name="acaba">Finish</string>
 
 
 
-<!--LISTA PALABRAS-->
+    <!--LISTA PALABRAS-->
     <array name="words">
-        <item>Paraula 1</item>
-        <item>Paraula 2</item>
-        <item>Paraula 3</item>
-        <item>Paraula 4</item>
-        <item>Paraula 5</item>
-        <item>Paraula 6</item>
+        <item>Word 1</item>
+        <item>Word 2</item>
+        <item>Word 3</item>
+        <item>Word 4</item>
+        <item>Word 5</item>
+        <item>Word 6</item>
     </array>
 
 </resources>

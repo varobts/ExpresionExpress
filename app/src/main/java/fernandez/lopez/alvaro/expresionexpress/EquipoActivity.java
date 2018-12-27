@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +29,23 @@ public class EquipoActivity extends AppCompatActivity {
     private Adapter adapter;
     private boolean estoy1=true; //Flag que me dice si estoy editando los parametros del equipo 1 o 2
 
+    private String R_equipo1, R_equipo2, R_participantes, R_faltaEq, R_faltaPart;   //Strings referenciats als recursos
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipo);
 
+        R_equipo1 = getResources().getString(R.string.equipo1);
+        R_equipo2 = getResources().getString(R.string.equipo2);
+        R_participantes = getResources().getString(R.string.participantes);
+        R_faltaEq = getResources().getString(R.string.faltaEquipo);
+        R_faltaPart = getResources().getString(R.string.faltaParticipantes);
+
         PartListView = findViewById(R.id.PartListView);
         NomEquipView = findViewById(R.id.NomEquipView);
         EquipoView = findViewById(R.id.EquipoView);
-        EquipoView.setText("Equipo 1:");
+        EquipoView.setText(R_equipo1);
         nomParticipantView = findViewById(R.id.nomParticipantView);
 
         jugadors=new ArrayList<>();
@@ -58,16 +67,23 @@ public class EquipoActivity extends AppCompatActivity {
     }
 
     public void OnClickNext(View view) {
-        if(estoy1) {
-            equipo1=new Equipo(NomEquipView.getText().toString(), 1,jugadors);
-            estoy1=false;
-            //Llama a un metodo que sea NuevoEquipo, este metodo me resetea todos los valores
-            NuevoEquipo();
+        if(!NomEquipView.getText().toString().equals("") && jugadors.size()>0) {
+            if (estoy1) {
+                equipo1 = new Equipo(NomEquipView.getText().toString(), 1, jugadors);
+                estoy1 = false;
+                //Llama a un metodo que sea NuevoEquipo, este metodo me resetea todos los valores
+                NuevoEquipo();
+            } else {
+                equipo2 = new Equipo(NomEquipView.getText().toString(), 2, jugadors);
+                estoy1 = true;
+                LlamaTableroActivity();
+            }
+        }
+        else if (NomEquipView.getText().toString().equals("")){
+            Toast.makeText(this,R_faltaEq,Toast.LENGTH_SHORT).show();
         }
         else {
-            equipo2=new Equipo(NomEquipView.getText().toString(), 2,jugadors);
-            estoy1=true;
-            LlamaTableroActivity();
+            Toast.makeText(this,R_faltaPart,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -80,7 +96,7 @@ public class EquipoActivity extends AppCompatActivity {
     }
 
     public void NuevoEquipo(){
-        EquipoView.setText("Equipo 2:");
+        EquipoView.setText(R_equipo2);
         NomEquipView.setText("");
         nomParticipantView.setText("");
         int i = jugadors.size();

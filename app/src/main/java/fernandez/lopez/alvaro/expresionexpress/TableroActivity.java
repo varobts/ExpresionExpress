@@ -31,6 +31,8 @@ public class TableroActivity extends AppCompatActivity {
     private Button Pasa_btn, Tiempo_btn;
     private int jug1=0, jug2=0;
 
+    private String R_equipo1, R_equipo2, R_pos, R_turno, R_sig, R_gana, R_fin, R_repite, R_acaba; //Strings referenciats als recursos
+
 //Variable per a saber quantes paraules portem (NOMÉS en aquesta versió 0.0.2)
     private int FiRonda=1;
 
@@ -47,6 +49,16 @@ public class TableroActivity extends AppCompatActivity {
         indicePalabras = new ArrayList<>();
         rellenaPalabras();
 
+        R_equipo1 = getResources().getString(R.string.equipo1);
+        R_equipo2 = getResources().getString(R.string.equipo2);
+        R_pos = getResources().getString(R.string.posicion);
+        R_turno = getResources().getString(R.string.turno);
+        R_sig = getResources().getString(R.string.siguiente);
+        R_gana = getResources().getString(R.string.gana);
+        R_fin = getResources().getString(R.string.fin);
+        R_repite = getResources().getString(R.string.repite);
+        R_acaba = getResources().getString(R.string.acaba);
+
 //Referenciem als objectes necessaris de la pantalla
         Eq1View = findViewById(R.id.Eq1View);
         Eq2View = findViewById(R.id.Eq2View);
@@ -58,12 +70,12 @@ public class TableroActivity extends AppCompatActivity {
         Pasa_btn = findViewById(R.id.Pasa_btn);
         Tiempo_btn = findViewById(R.id.Tiempo_btn);
 
-        Eq1View.setText("Equipo 1:\n" + equipo1.getNom());
-        Eq2View.setText("Equipo 2:\n" + equipo2.getNom());
-        Pos1View.setText("Posición:\n" + equipo1.getCasilla() + "/7");
-        Pos2View.setText("Posición:\n" + equipo2.getCasilla() + "/7");
-        Turno1View.setText("Turno:\n" + equipo1.getJugadors().get(jug1));
-        Turno2View.setText("Siguiente:\n" + equipo2.getJugadors().get(jug2));
+        Eq1View.setText(R_equipo1 + ":\n" + equipo1.getNom());
+        Eq2View.setText(R_equipo2 + ":\n" + equipo2.getNom());
+        Pos1View.setText(R_pos + ":\n" + equipo1.getCasilla() + "/7");
+        Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
+        Turno1View.setText(R_turno + ":\n" + equipo1.getJugadors().get(jug1));
+        Turno2View.setText(R_sig + ":\n" + equipo2.getJugadors().get(jug2));
         jug1++;
         juego.setTurno(1);
 
@@ -92,7 +104,7 @@ public class TableroActivity extends AppCompatActivity {
         int comp1aPart = random.nextInt(61) + 20;
         final int comp2aPart = (int) (comp1aPart*0.2);
         new CountDownTimer((comp1aPart-comp2aPart)*1000, 1000) {
-            ToneGenerator tone = new ToneGenerator(AudioManager.STREAM_ALARM, 50);
+            ToneGenerator tone = new ToneGenerator(AudioManager.STREAM_ALARM, 75);
             public void onTick(long millisUntilFinished) {
                 //Afegir pitidito
                 tone.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 100);
@@ -135,16 +147,16 @@ public class TableroActivity extends AppCompatActivity {
         if (juego.getTurno() == 1) {
             juego.setTurno(2);
             //Canviem els jugadors actual i següent
-            Turno1View.setText("Siguiente:\n" + equipo1.getJugadors().get(jug1));
-            Turno2View.setText("Turno:\n" + equipo2.getJugadors().get(jug2));
+            Turno1View.setText(R_sig + ":\n" + equipo1.getJugadors().get(jug1));
+            Turno2View.setText(R_turno + ":\n" + equipo2.getJugadors().get(jug2));
             //Preparem següent jugador
             jug2++;
             if (jug2 == equipo2.getJugadors().size()) jug2 = 0;
         } else {
             juego.setTurno(1);
             //Canviem els jugadors actual i següent
-            Turno1View.setText("Turno:\n" + equipo1.getJugadors().get(jug1));
-            Turno2View.setText("Siguiente:\n" + equipo2.getJugadors().get(jug2));
+            Turno1View.setText(R_turno + ":\n" + equipo1.getJugadors().get(jug1));
+            Turno2View.setText(R_sig + ":\n" + equipo2.getJugadors().get(jug2));
             //Preparem següent jugador
             jug1++;
             if (jug1 == equipo1.getJugadors().size()) jug1 = 0;
@@ -155,16 +167,16 @@ public class TableroActivity extends AppCompatActivity {
     private void finalJoc() {
         //Final joc, creem un 'AlertDialog'
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        if (equipo1.getCasilla() == 7) builder.setMessage("Ha guanyat l'equip " + equipo1.getNom() +"!");
-        else builder.setMessage("Ha guanyat l'equip " + equipo2.getNom() +"!");
-        builder.setTitle("FINAL DEL JOC")
-                .setPositiveButton("Torna a jugar", new DialogInterface.OnClickListener() {
+        if (equipo1.getCasilla() == 7) builder.setMessage(R_gana + equipo1.getNom() +"!");
+        else builder.setMessage(R_gana + equipo2.getNom() +"!");
+        builder.setTitle(R_fin)
+                .setPositiveButton(R_repite, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         resetLayout();
                     }
                 })
-                .setNegativeButton("Acaba", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R_acaba, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -176,11 +188,11 @@ public class TableroActivity extends AppCompatActivity {
     private void casellaSeguent() { //Afegir Toast indicant què passa i què fer
         if(juego.getTurno()==1) {
             equipo2.setCasilla(equipo2.getCasilla()+1);
-            Pos2View.setText("Posición:\n" + equipo2.getCasilla() + "/7");
+            Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
         }
         else {
             equipo1.setCasilla(equipo1.getCasilla()+1);
-            Pos1View.setText("Posición:\n" + equipo1.getCasilla() + "/7");
+            Pos1View.setText(R_pos + ":\n" + equipo1.getCasilla() + "/7");
         }
         FiRonda = 1;
         Pasa_btn.setEnabled(false);
@@ -201,8 +213,8 @@ public class TableroActivity extends AppCompatActivity {
         equipo1.setCasilla(0);
         equipo2.setCasilla(0);
         juego.setTurno(1);
-        Pos1View.setText("Posición:\n" + equipo1.getCasilla() + "/7");
-        Pos2View.setText("Posición:\n" + equipo2.getCasilla() + "/7");
+        Pos1View.setText(R_pos + ":\n" + equipo1.getCasilla() + "/7");
+        Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
         return null;
     }
 }
