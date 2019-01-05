@@ -14,12 +14,15 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     }
 
     public void OnClickPlay(View view) {
-
+        Intent intent = new Intent(this, EquipoActivity.class);
+        startActivity(intent);
     }
     public void OnClickMult(View view) {
-
+        Intent intent = new Intent(this, EquipoActivity.class);
+        startActivity(intent);
     }
     public void OnClickInstru(View view) {
-
+        Intent intent = new Intent(this, InstruActivity.class);
+        startActivity(intent);
     }
 }
