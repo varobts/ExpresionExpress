@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Expresion Express</string>
-<!--INSTRUCCIONES-->
+    <!--INSTRUCCIONES-->
     <string name="instruccionesTit">Instruccions:</string>
     <string name="instrucciones">“Expresion Express” és un joc de taula de l’any 1996 de la marca MB
         Juegos que consisteix en endevinar paraules a partir de la descripció que se’n fa d’aquestes
@@ -18,7 +18,7 @@
         El joc continua així fins que un dels dos equips arriba a l’última casella, fet que indica q
         ue aquest és el guanyador.
     </string>
-<!--EQUIPO ACTIVITY-->
+    <!--EQUIPO ACTIVITY-->
     <string name="equipo1">Equip 1</string>    <!--Tambien en TABLERO-->
     <string name="equipo2">Equip 2</string>    <!--Tambien en TABLERO-->
     <string name="participantes">Participants</string>
@@ -26,7 +26,14 @@
     <string name="faltaEquipo">Falta nom de l\'equip</string>
     <string name="faltaParticipantes">Falta afegir participants</string>
 
-<!--TABLERO ACTIVITY-->
+    <!--MenuPrincipal ACTIVITY-->
+    <string name="expresion">Expresion</string>
+    <string name="express">Express</string>
+    <string name="play">Jugar</string>
+    <string name="multiplayer">Multijugador</string>
+    <string name="instru">Instruccions</string>
+
+    <!--TABLERO ACTIVITY-->
     <string name="posicion">Posició</string>
     <string name="turno">Torn</string>
     <string name="tiempo">Temps</string>
@@ -37,8 +44,7 @@
     <string name="acaba">Acaba</string>
 
 
-
-<!--LISTA PALABRAS-->
+    <!--LISTA PALABRAS-->
     <array name="words">
         <item>Paraula 1</item>
         <item>Paraula 2</item>

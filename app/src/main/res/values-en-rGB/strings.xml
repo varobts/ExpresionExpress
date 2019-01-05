@@ -28,6 +28,13 @@
     <string name="faltaEquipo">Write the team name</string>
     <string name="faltaParticipantes">Add players</string>
 
+    <!--MenuPrincipal ACTIVITY-->
+    <string name="expresion">Expresion</string>
+    <string name="express">Express</string>
+    <string name="play">Play</string>
+    <string name="multiplayer">Multiplayer</string>
+    <string name="instru">Rules</string>
+
     <!--TABLERO ACTIVITY-->
     <string name="posicion">Position</string>
     <string name="turno">Turn</string>
