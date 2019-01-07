@@ -36,6 +36,10 @@
     <string name="multiplayer">Multiplayer</string>
     <string name="instru">Rules</string>
 
+    <!--MultMenu ACTIVITY-->
+    <string name="create">Create</string>
+    <string name="join">Join</string>
+
     <!--TABLERO ACTIVITY-->
     <string name="posicion">Position</string>
     <string name="turno">Turn</string>

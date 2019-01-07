@@ -37,6 +37,10 @@
     <string name="multiplayer">Multijugador</string>
     <string name="instru">Instrucciones</string>
 
+    <!--MultMenu ACTIVITY-->
+    <string name="create">Crear</string>
+    <string name="join">Unirse</string>
+
     <!--TABLERO ACTIVITY-->
     <string name="posicion">Posición</string>
     <string name="turno">Turno</string>
