@@ -10,6 +10,9 @@ import android.widget.Toast;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MultMenuActivity extends AppCompatActivity {
 
     private EditText CodeView;
@@ -17,7 +20,8 @@ public class MultMenuActivity extends AppCompatActivity {
     private String R_WrongCode,R_EmptyCode;
     private boolean mult;
 
-    
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference Partida = db.collection("ExpresionExpress");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,12 @@ public class MultMenuActivity extends AppCompatActivity {
 
     public void OnClickCreate (View view){
         CreationCode = CodeView.getText().toString();
+        creaPartida();
         if (CreationCode.equals("")){
             Toast.makeText(this, R_EmptyCode, Toast.LENGTH_SHORT).show();
         }
         else CodeView.setText("");
+
     }
     public void OnClickJoin (View view){
         JoinCode = CodeView.getText().toString();
@@ -52,5 +58,36 @@ public class MultMenuActivity extends AppCompatActivity {
             Toast.makeText(this, R_WrongCode, Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void creaPartida(){
+
+        Map <String, Object> Joc = new HashMap<>();
+        Map <String, Object> Equip = new HashMap<>();
+
+        Joc.put("Codigo", CreationCode);
+        Joc.put("Palabra", "");
+        Joc.put("Tiempo", 0);
+        Joc.put("Turno", 1);
+
+        Partida.document(CreationCode).set(Joc);
+
+        Equip.put("Casilla", 0);
+        Equip.put("Jugadors", "");
+        Equip.put("Nom", "");
+        Equip.put("Num", 1);
+
+        Partida.document(CreationCode).collection("Equipos").
+                document("Equipo1").set(Equip);
+
+        Equip = new HashMap<>();
+
+        Equip.put("Casilla", 0);
+        Equip.put("Jugadors", "");
+        Equip.put("Nom", "");
+        Equip.put("Num", 2);
+
+        Partida.document(CreationCode).collection("Equipos").
+                document("Equipo2").set(Equip);
     }
 }
