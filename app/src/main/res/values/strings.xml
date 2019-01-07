@@ -19,6 +19,7 @@
         ue aquest és el guanyador.
     </string>
     <!--EQUIPO ACTIVITY-->
+    <string name="equipo">Equip</string>
     <string name="equipo1">Equip 1</string>    <!--Tambien en TABLERO-->
     <string name="equipo2">Equip 2</string>    <!--Tambien en TABLERO-->
     <string name="participantes">Participants</string>

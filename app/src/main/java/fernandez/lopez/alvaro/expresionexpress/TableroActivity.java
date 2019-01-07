@@ -41,6 +41,7 @@ public class TableroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablero);
 
+
         equipo1 = (Equipo) getIntent().getExtras().getSerializable("Equipo1");
         equipo2 = (Equipo) getIntent().getExtras().getSerializable("Equipo2");
         juego = new Juego("Codi");

@@ -21,6 +21,7 @@
     </string>
 
     <!--EQUIPO ACTIVITY-->
+    <string name="equipo">Team</string>
     <string name="equipo1">Team 1</string>    <!--Tambien en TABLERO-->
     <string name="equipo2">Team 2</string>    <!--Tambien en TABLERO-->
     <string name="participantes">Players</string>

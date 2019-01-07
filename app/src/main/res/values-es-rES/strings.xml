@@ -21,6 +21,7 @@
         indica que este es el ganador.
     </string>
     <!--EQUIPO ACTIVITY-->
+    <string name="equipo">Equipo</string>
     <string name="equipo1">Equipo 1</string>    <!--Tambien en TABLERO-->
     <string name="equipo2">Equipo 2</string>    <!--Tambien en TABLERO-->
     <string name="participantes">Participantes</string>

@@ -20,32 +20,37 @@ import java.util.List;
 
 public class EquipoActivity extends AppCompatActivity {
 
+    private boolean mult;
     private static final int TABLERO = 0;
     private RecyclerView PartListView;
     private EditText NomEquipView, nomParticipantView;
     private TextView EquipoView;
-    private Equipo equipo1,equipo2;
+    private Equipo equipo,equipo1,equipo2;
     private List<String> jugadors;
     private Adapter adapter;
     private boolean estoy1=true; //Flag que me dice si estoy editando los parametros del equipo 1 o 2
 
-    private String R_equipo1, R_equipo2, R_participantes, R_faltaEq, R_faltaPart;   //Strings referenciats als recursos
+    private String R_equipo1, R_equipo2, R_participantes, R_faltaEq, R_faltaPart,R_equipo;   //Strings referenciats als recursos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipo);
 
+        mult= getIntent().getExtras().getBoolean("ModeMult");
+
         R_equipo1 = getResources().getString(R.string.equipo1);
         R_equipo2 = getResources().getString(R.string.equipo2);
         R_participantes = getResources().getString(R.string.participantes);
         R_faltaEq = getResources().getString(R.string.faltaEquipo);
         R_faltaPart = getResources().getString(R.string.faltaParticipantes);
+        R_equipo = getResources().getString(R.string.equipo);
 
         PartListView = findViewById(R.id.PartListView);
         NomEquipView = findViewById(R.id.NomEquipView);
         EquipoView = findViewById(R.id.EquipoView);
-        EquipoView.setText(R_equipo1);
+        if(mult) EquipoView.setText(R_equipo);
+        else EquipoView.setText(R_equipo1);
         nomParticipantView = findViewById(R.id.nomParticipantView);
 
         jugadors=new ArrayList<>();
@@ -67,23 +72,28 @@ public class EquipoActivity extends AppCompatActivity {
     }
 
     public void OnClickNext(View view) {
-        if(!NomEquipView.getText().toString().equals("") && jugadors.size()>0) {
-            if (estoy1) {
-                equipo1 = new Equipo(NomEquipView.getText().toString(), 1, jugadors);
-                estoy1 = false;
-                //Llama a un metodo que sea NuevoEquipo, este metodo me resetea todos los valores
-                NuevoEquipo();
-            } else {
-                equipo2 = new Equipo(NomEquipView.getText().toString(), 2, jugadors);
-                estoy1 = true;
-                LlamaTableroActivity();
-            }
-        }
-        else if (NomEquipView.getText().toString().equals("")){
-            Toast.makeText(this,R_faltaEq,Toast.LENGTH_SHORT).show();
+        if(mult){
+            equipo = new Equipo(NomEquipView.getText().toString(), 1, jugadors);
+            LlamaTableroActivity();
         }
         else {
-            Toast.makeText(this,R_faltaPart,Toast.LENGTH_SHORT).show();
+
+            if (!NomEquipView.getText().toString().equals("") && jugadors.size() > 0) {
+                if (estoy1) {
+                    equipo1 = new Equipo(NomEquipView.getText().toString(), 1, jugadors);
+                    estoy1 = false;
+                    //Llama a un metodo que sea NuevoEquipo, este metodo me resetea todos los valores
+                    NuevoEquipo();
+                } else {
+                    equipo2 = new Equipo(NomEquipView.getText().toString(), 2, jugadors);
+                    estoy1 = true;
+                    LlamaTableroActivity();
+                }
+            } else if (NomEquipView.getText().toString().equals("")) {
+                Toast.makeText(this, R_faltaEq, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R_faltaPart, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
