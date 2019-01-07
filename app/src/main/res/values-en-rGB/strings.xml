@@ -39,6 +39,8 @@
     <!--MultMenu ACTIVITY-->
     <string name="create">Create</string>
     <string name="join">Join</string>
+    <string name="R_EmptyCode">It\'s needed to introduce the game code</string>
+    <string name="R_WrongCode">Wrong code</string>
 
     <!--TABLERO ACTIVITY-->
     <string name="posicion">Position</string>

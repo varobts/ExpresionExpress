@@ -37,6 +37,8 @@
     <!--MultMenu ACTIVITY-->
     <string name="create">Crear</string>
     <string name="join">Unir-se</string>
+    <string name="R_EmptyCode">Falta introduir el codi de la partida</string>
+    <string name="R_WrongCode">Codi incorrecte</string>
 
     <!--TABLERO ACTIVITY-->
     <string name="posicion">Posició</string>

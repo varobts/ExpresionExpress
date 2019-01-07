@@ -16,6 +16,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     }
 
     public void OnClickPlay(View view) {
+        mult=false;
         Intent intent = new Intent(this, EquipoActivity.class);
         intent.putExtra("ModeMult",mult);
         startActivity(intent);
