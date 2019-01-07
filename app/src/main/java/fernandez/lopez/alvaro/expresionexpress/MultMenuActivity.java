@@ -7,12 +7,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class MultMenuActivity extends AppCompatActivity {
 
     private EditText CodeView;
     private String CreationCode,JoinCode;
     private String R_WrongCode,R_EmptyCode;
     private boolean mult;
+
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

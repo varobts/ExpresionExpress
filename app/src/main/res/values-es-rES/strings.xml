@@ -57,12 +57,150 @@
 
     <!--LISTA PALABRAS-->
     <array name="words">
-        <item>Palabra 1</item>
-        <item>Palabra 2</item>
-        <item>Palabra 3</item>
-        <item>Palabra 4</item>
-        <item>Palabra 5</item>
-        <item>Palabra 6</item>
+        <item>PONER GASOLINA</item>
+        <item>CORONACIÓN</item>
+        <item>CONJUNTO</item>
+        <item>STOP</item>
+        <item>CERDO</item>
+        <item>MUELA</item>
+        <item>EMBARAZADA</item>
+        <item>FLASH</item>
+        <item>BLANCANIEVES</item>
+        <item>ALBORNOZ</item>
+        <item>CINTURA</item>
+        <item>ESPECIALISTA</item>
+        <item>CIRUELA</item>
+        <item>ASESINATO</item>
+        <item>CACAHUETE</item>
+        <item>SIDRA</item>
+        <item>FESTEJAR</item>
+        <item>CUCHARÓN</item>
+        <item>HAMACA</item>
+        <item>CONVICTO</item>
+        <item>MOMIA</item>
+        <item>DIVERTIDO</item>
+        <item>PISCINA</item>
+        <item>EL MAGO DE OZ</item>
+        <item>TARTA NUPCIAL</item>
+        <item>KARATE</item>
+        <item>INSTINTO</item>
+        <item>JOYAS REALES</item>
+        <item>EL ESCONDITE</item>
+        <item>SORBETE</item>
+        <item>PESADILLA</item>
+        <item>SOLAPA</item>
+        <item>ORO</item>
+        <item>AULLIDO</item>
+        <item>BUMERANG</item>
+        <item>ACCIDENTE</item>
+        <item>TRANVÍA</item>
+        <item>LA MANCHA</item>
+        <item>LAVANDERA</item>
+        <item>GRADUADO</item>
+        <item>POSTRE</item>
+        <item>CORREOS</item>
+        <item>GRACIA DE DIOS</item>
+        <item>OLER</item>
+        <item>HACER DOBLETE</item>
+        <item>REPISA</item>
+        <item>FARO</item>
+        <item>SIRENA</item>
+        <item>RIZAR</item>
+        <item>DRAGAR</item>
+        <item>ARROYO</item>
+        <item>VALLE</item>
+        <item>BILLETE</item>
+        <item>BANDA SONORA</item>
+        <item>PALACIO</item>
+        <item>COSER Y CANTAR</item>
+        <item>CASCO</item>
+        <item>ESCOBA</item>
+        <item>MARIPOSA</item>
+        <item>ACUARIO</item>
+        <item>JUGUETE</item>
+        <item>SOPA</item>
+        <item>VICTORIA ABRIL</item>
+        <item>CABEZA DE TURCO</item>
+        <item>CALVICIE</item>
+        <item>VIUDO</item>
+        <item>TRAMAR ALGO</item>
+        <item>ESTADIO</item>
+        <item>PAVO REAL</item>
+        <item>LABERINTO</item>
+        <item>HURGAR</item>
+        <item>GORDO</item>
+        <item>JOTA ARAGONESA</item>
+        <item>DINAMITA</item>
+        <item>OBSCENO</item>
+        <item>DEMÓCRATA</item>
+        <item>MARIQUITA</item>
+        <item>CUARTO</item>
+        <item>LA TAPADERA</item>
+        <item>SEÑAL</item>
+        <item>CERO</item>
+        <item>RELÁMPAGO</item>
+        <item>HILO</item>
+        <item>RESBALADIZO</item>
+        <item>BURRO</item>
+        <item>DAMA DE HONOR</item>
+        <item>ALARMA</item>
+        <item>CLAUSURA</item>
+        <item>UNA DE JAIMITO</item>
+        <item>ORDENADOR</item>
+        <item>LÓBULO</item>
+        <item>PILOTO</item>
+        <item>PADDLE</item>
+        <item>VISTA AÉREA</item>
+        <item>RICO</item>
+        <item>TORNADO</item>
+        <item>APERITIVO</item>
+        <item>METRALLETA</item>
+        <item>ALGA</item>
+        <item>CORAZÓN</item>
+        <item>CORDÓN</item>
+        <item>SOMBRERO</item>
+        <item>RIGOR MORTIS</item>
+        <item>GRÚA</item>
+        <item>EL PIRULÍ</item>
+        <item>MÁSCARA</item>
+        <item>CASINO</item>
+        <item>MANGUERA</item>
+        <item>PAUSA</item>
+        <item>GRANO</item>
+        <item>GOMA</item>
+        <item>ENSEÑANZA</item>
+        <item>MUÑECA</item>
+        <item>MUÉRDAGO</item>
+        <item>CHIMENEA</item>
+        <item>A OSCURAS</item>
+        <item>PÉTALO</item>
+        <item>ESCALÓN</item>
+        <item>SAUNA</item>
+        <item>VISITAR</item>
+        <item>BARRIL</item>
+        <item>BOCA</item>
+        <item>COMEDIA</item>
+        <item>ISLA</item>
+        <item>LA PANTERA ROSA</item>
+        <item>TOMAR EL PELO</item>
+        <item>SACACORCHOS</item>
+        <item>GUSTO</item>
+        <item>ENSALADA MIXTA</item>
+        <item>CORRAL</item>
+        <item>ESTRELLA CINE</item>
+        <item>LATIGAZO</item>
+        <item>JUNGLA</item>
+        <item>GALÁN</item>
+        <item>MALETA</item>
+        <item>FOCA</item>
+        <item>TALLAR</item>
+        <item>BILLAR</item>
+        <item>NUEVO</item>
+        <item>CRIMEN</item>
+        <item>KING KONG</item>
+        <item>POLVO</item>
+        <item>CASSETTE</item>
+        <item>AFILADO</item>
     </array>
 
 </resources>

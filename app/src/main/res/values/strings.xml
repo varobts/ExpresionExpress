@@ -53,12 +53,150 @@
 
     <!--LISTA PALABRAS-->
     <array name="words">
-        <item>Paraula 1</item>
-        <item>Paraula 2</item>
-        <item>Paraula 3</item>
-        <item>Paraula 4</item>
-        <item>Paraula 5</item>
-        <item>Paraula 6</item>
+        <item>POSAR BENZINA</item>
+        <item>CORONACIÓ</item>
+        <item>CONJUNT</item>
+        <item>STOP</item>
+        <item>PORC</item>
+        <item>QUEIXAL</item>
+        <item>EMBARASSADA</item>
+        <item>FLASH</item>
+        <item>BLANCANEUS</item>
+        <item>BARNÚS</item>
+        <item>CINTURA</item>
+        <item>ESPECIALISTA</item>
+        <item>PRUNA</item>
+        <item>ASSASSINAT</item>
+        <item>CACAUET</item>
+        <item>SIDRA</item>
+        <item>FESTEJAR</item>
+        <item>CULLEROT</item>
+        <item>HAMACA</item>
+        <item>CONVICTE</item>
+        <item>MÒMIA</item>
+        <item>DIVERTIT</item>
+        <item>PISCINA</item>
+        <item>EL MAG D\'OZ</item>
+        <item>PASTÍS NUPCIAL</item>
+        <item>KARATE</item>
+        <item>INSTINTO</item>
+        <item>JOIES REIALS</item>
+        <item>FET I AMAGAR</item>
+        <item>SORBET</item>
+        <item>MALSON</item>
+        <item>SOLAPA</item>
+        <item>OR</item>
+        <item>UDOL</item>
+        <item>BUMERANG</item>
+        <item>ACCIDENT</item>
+        <item>TRAMVIA</item>
+        <item>LA MANXA</item>
+        <item>BUGADERA</item>
+        <item>GRADUAT</item>
+        <item>POSTRES</item>
+        <item>CORREUS</item>
+        <item>GRÀCIA DE DÈU</item>
+        <item>OLORAR</item>
+        <item>FER EL DOBLET</item>
+        <item>PRESTATGE</item>
+        <item>FAR</item>
+        <item>SIRENA</item>
+        <item>ARRISSAR</item>
+        <item>DRAGAR</item>
+        <item>RIEROL</item>
+        <item>VALL</item>
+        <item>BITLLET</item>
+        <item>BANDA SONORA</item>
+        <item>PALAU</item>
+        <item>BUFAR I FER AMPOLLES</item>
+        <item>CASC</item>
+        <item>ESCOMBRA</item>
+        <item>PAPALLONA</item>
+        <item>AQUARI</item>
+        <item>JOGUINA</item>
+        <item>SOPA</item>
+        <item>VICTORIA ABRIL</item>
+        <item>CAP DE TURC</item>
+        <item>CALVÍCIE</item>
+        <item>VIUDO</item>
+        <item>MAQUINAR QUELCOM</item>
+        <item>ESTADI</item>
+        <item>GALL D\'INDI</item>
+        <item>LABERINT</item>
+        <item>BURXAR</item>
+        <item>GROS</item>
+        <item>JOTA ARAGONESA</item>
+        <item>DINAMITA</item>
+        <item>OBSCÈ</item>
+        <item>DEMÒCRATA</item>
+        <item>MARIETA</item>
+        <item>QUART</item>
+        <item>LA TAPADORA</item>
+        <item>SENYAL</item>
+        <item>ZERO</item>
+        <item>LLAMPEC</item>
+        <item>FIL</item>
+        <item>RELLISCÓS</item>
+        <item>ASE</item>
+        <item>DAMA D\'HONOR</item>
+        <item>ALARMA</item>
+        <item>CLAUSURA</item>
+        <item>UNA DE JAIMITO</item>
+        <item>ORDINADOR</item>
+        <item>LÒBUL</item>
+        <item>PILOT</item>
+        <item>PADDLE</item>
+        <item>VISTA AÈRIA</item>
+        <item>RIC</item>
+        <item>TORNADO</item>
+        <item>APERITIU</item>
+        <item>METRALLETA</item>
+        <item>ALGA</item>
+        <item>COR</item>
+        <item>CORDÓ</item>
+        <item>BARRET</item>
+        <item>RIGOR MORTIS</item>
+        <item>GRUA</item>
+        <item>EL PIRULÍ</item>
+        <item>MÀSCARA</item>
+        <item>CASINO</item>
+        <item>MANÈGA</item>
+        <item>PAUSA</item>
+        <item>GRA</item>
+        <item>GOMA</item>
+        <item>ENSENYAMENT</item>
+        <item>NINA</item>
+        <item>VESC</item>
+        <item>XEMENEIA</item>
+        <item>A FOSQUES</item>
+        <item>PÈTAL</item>
+        <item>GRAÓ</item>
+        <item>SAUNA</item>
+        <item>VISITAR</item>
+        <item>BARRIL</item>
+        <item>BOCA</item>
+        <item>COMÈDIA</item>
+        <item>ILLA</item>
+        <item>LA PANTERA ROSA</item>
+        <item>PRENDRE EL PÈL</item>
+        <item>LLEVATAPS</item>
+        <item>GUST</item>
+        <item>AMANIDA MIXTA</item>
+        <item>CORRAL</item>
+        <item>ESTRELLA CINE</item>
+        <item>FUETADA</item>
+        <item>JUNGLA</item>
+        <item>GALANT</item>
+        <item>MALETA</item>
+        <item>FOCA</item>
+        <item>TALLAR</item>
+        <item>BILLAR</item>
+        <item>NOU</item>
+        <item>CRIM</item>
+        <item>KING KONG</item>
+        <item>POLS</item>
+        <item>CASSETTE</item>
+        <item>ESMOLAT</item>
     </array>
 
 </resources>

@@ -3,21 +3,21 @@
     <string name="app_name">Expresion Express</string>
     <!--INSTRUCCIONES-->
     <string name="instruccionesTit">Instructions:</string>
-    <string name="instrucciones">“Expresion Express” és un joc de taula de l’any 1996 de la marca MB
-        Juegos que consisteix en endevinar paraules a partir de la descripció que se’n fa d’aquestes
-        sense poder-ne dir cap de la seva mateixa família.
-        Els jugadors formen 2 equips i s’asseuen intercaladament, és a dir, si hi ha l’equip A i l’e
-        quip B, es col·loquen ABABAB... Al començament de cada ronda, es posa en marxa un cronòmetre
-        (amb un temps aleatori) i l’integrant de l’equip que té el torn comença a definir la paraula
-        que li ha tocat. Una vegada la resta de l’equip l’ha encertada, el jugador que definia la pa
-        raula passa el torn (en el joc original un disc, en l’aplicació serà el mòbil en joc local)
-        al jugador que té al costat (tal i com estan asseguts, serà de l’altre equip) i llavors és l
-        ’altre equip el que li toca endevinar la paraula. Tot continua així fins que s’acaba el temp
-        s. En quan això passa, l’equip que tenia el torn de definició perd la ronda i, llavors, l’al
-        tre equip és qui avança una casella de les 7 que hi ha al tauler. En la següent ronda, l’equ
-        ip que comença a definir la paraula és l’equip que ha perdut la que s’estava jugant.
-        El joc continua així fins que un dels dos equips arriba a l’última casella, fet que indica q
-        ue aquest és el guanyador.
+    <string name="instrucciones">"Expresion Express" is a board game from the year 1996 of the MB Ju
+        egos brand, which consists in guessing words based on the description that is made of them w
+        ithout being able to say any word of their own family.
+        The players form 2 teams and sit intercalately, that is, if there is team A and team B, they
+        place ABABAB ... At the beginning of each round, a stopwatch (with a random time) and the te
+        am member who has the turn begins to define the word he has touched. Once the rest of the te
+        am has guessed it, the player who defined the word turns the turn (in the original game a di
+        sk, in the application will be the mobile in local game) to the player that has next (such h
+        ow are they seated, it will be from the other team) and then the other team is the one who p
+        lays the guess. Everything goes on until the time runs out. When this happens, the team that
+        had the lead defined loses the round and, then, the other team is the one who advances a squ
+        are of 7 on the board. In the next round, the team that starts defining the word is the team
+        that lost what was being played.
+        The game continues until one of the two teams reaches the finish square, indicating that thi
+        s is the winner.
     </string>
 
     <!--EQUIPO ACTIVITY-->
@@ -56,12 +56,150 @@
 
     <!--LISTA PALABRAS-->
     <array name="words">
-        <item>Word 1</item>
-        <item>Word 2</item>
-        <item>Word 3</item>
-        <item>Word 4</item>
-        <item>Word 5</item>
-        <item>Word 6</item>
+        <item>REFUEL</item>
+        <item>CORONATION</item>
+        <item>COMBINATION</item>
+        <item>STOP</item>
+        <item>PIG</item>
+        <item>MOLAR</item>
+        <item>PREGNANT</item>
+        <item>FLASH</item>
+        <item>SNOW WHITE</item>
+        <item>BATH ROBE</item>
+        <item>WAIST</item>
+        <item>SPECIALIST</item>
+        <item>PLUM</item>
+        <item>MURDER</item>
+        <item>PEANUT</item>
+        <item>CIDER</item>
+        <item>CELEBRATE</item>
+        <item>LADLE</item>
+        <item>HAMMOCK</item>
+        <item>CONVICT</item>
+        <item>MUMMY</item>
+        <item>FUNNY</item>
+        <item>POOL</item>
+        <item>OZ WIZARD</item>
+        <item>WEDDING CAKE</item>
+        <item>KARATE</item>
+        <item>INSTINCT</item>
+        <item>ROYAL JEWELS</item>
+        <item>HIDE AND SEEK</item>
+        <item>SORBET</item>
+        <item>NIGHTMARE</item>
+        <item>LAPEL</item>
+        <item>GOLD</item>
+        <item>HOWL</item>
+        <item>BOOMERANG</item>
+        <item>ACCIDENT</item>
+        <item>TRAM</item>
+        <item>LA MANCHA</item>
+        <item>LAUNDRESS</item>
+        <item>LICENSED</item>
+        <item>DESSERT</item>
+        <item>POST OFFICE</item>
+        <item>GRACE OF GOD</item>
+        <item>SMELL</item>
+        <item>TO DOUBLE</item>
+        <item>SHELF</item>
+        <item>LIGHTHOUSE</item>
+        <item>SIREN</item>
+        <item>CURL</item>
+        <item>DREDGE</item>
+        <item>STREAM</item>
+        <item>VALLEY</item>
+        <item>TICKET</item>
+        <item>SOUNDTRACK</item>
+        <item>PALACE</item>
+        <item>A PIECE OF CAKE</item>
+        <item>HELMET</item>
+        <item>BROOM</item>
+        <item>BUTTERFLY</item>
+        <item>AQUARIUM</item>
+        <item>TOY</item>
+        <item>SOUP</item>
+        <item>VICTORIA ABRIL</item>
+        <item>SCAPEGOAT</item>
+        <item>BALDNESS</item>
+        <item>WIDOWER</item>
+        <item>PLOT SOMETHING</item>
+        <item>STADIUM</item>
+        <item>PEACOCK</item>
+        <item>LABYRINTH</item>
+        <item>RUMMAGE</item>
+        <item>OVERWEIGHT</item>
+        <item>ARAGONESE JOTA</item>
+        <item>DINAMITE</item>
+        <item>OBSCENE</item>
+        <item>DEMOCRAT</item>
+        <item>LADYBUG</item>
+        <item>FOURTH</item>
+        <item>COVER</item>
+        <item>SIGNAL</item>
+        <item>ZERO</item>
+        <item>LIGHTNING</item>
+        <item>THREAD</item>
+        <item>SLIPPERY</item>
+        <item>DONKEY</item>
+        <item>MAID OF HONOR</item>
+        <item>ALARM</item>
+        <item>ENCLOSED</item>
+        <item>JAIMITO\'S ONE</item>
+        <item>COMPUTER</item>
+        <item>LOBE</item>
+        <item>PILOT</item>
+        <item>PADDLE</item>
+        <item>AIR SIGHT</item>
+        <item>RICH</item>
+        <item>TORNADO</item>
+        <item>APERITIF</item>
+        <item>SUBMACHINE GUN</item>
+        <item>SEEWEAD</item>
+        <item>HEART</item>
+        <item>CORD</item>
+        <item>HAT</item>
+        <item>RIGOR MORTIS</item>
+        <item>CRANE</item>
+        <item>LOLLIPOP</item>
+        <item>MASK</item>
+        <item>CASINO</item>
+        <item>HOSE</item>
+        <item>PAUSE</item>
+        <item>GRAIN</item>
+        <item>RUBBER</item>
+        <item>EDUCATION</item>
+        <item>DOLL</item>
+        <item>MISTLETOE</item>
+        <item>FIREPLACE</item>
+        <item>IN DARKNESS</item>
+        <item>PETAL</item>
+        <item>STEP</item>
+        <item>SAUNA</item>
+        <item>VISIT</item>
+        <item>BARREL</item>
+        <item>MOUTH</item>
+        <item>COMEDY</item>
+        <item>ISLAND</item>
+        <item>PINK PANTHER</item>
+        <item>TRICK</item>
+        <item>CORKSCREW</item>
+        <item>TASTE</item>
+        <item>MIXED SALAD</item>
+        <item>FARMYARD</item>
+        <item>FILM STAR</item>
+        <item>LASHING</item>
+        <item>JUNGLE</item>
+        <item>GALLANT</item>
+        <item>SUITCASE</item>
+        <item>SEAL</item>
+        <item>CARVE</item>
+        <item>SNOOKER</item>
+        <item>NEW</item>
+        <item>CRIME</item>
+        <item>KING KONG</item>
+        <item>DUST</item>
+        <item>CASSETTE</item>
+        <item>SHARP</item>
     </array>
 
 </resources>
