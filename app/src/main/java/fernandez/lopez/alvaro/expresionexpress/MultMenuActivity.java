@@ -1,15 +1,20 @@
 package fernandez.lopez.alvaro.expresionexpress;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +24,8 @@ public class MultMenuActivity extends AppCompatActivity {
     private String CreationCode,JoinCode;
     private String R_WrongCode,R_EmptyCode;
     private boolean mult;
+
+    private Juego juego;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference Partida = db.collection("ExpresionExpress");
@@ -37,19 +44,25 @@ public class MultMenuActivity extends AppCompatActivity {
 
     public void OnClickCreate (View view){
         CreationCode = CodeView.getText().toString();
-        creaPartida();
+
         if (CreationCode.equals("")){
             Toast.makeText(this, R_EmptyCode, Toast.LENGTH_SHORT).show();
         }
-        else CodeView.setText("");
-
+        else {
+            CodeView.setText("");
+            creaPartida();
+            juego = new Juego(CreationCode);
+            llamaEquipoActivity();
+        }
     }
+
     public void OnClickJoin (View view){
         JoinCode = CodeView.getText().toString();
+
+        buscaPartida();
+
         if (JoinCode.equals(CreationCode)){
-            Intent intent = new Intent(this, EquipoActivity.class);
-            intent.putExtra("ModeMult",mult);
-            startActivity(intent);
+            llamaEquipoActivity();
         }
         else if (JoinCode.equals("")){
             Toast.makeText(this, R_EmptyCode, Toast.LENGTH_SHORT).show();
@@ -89,5 +102,24 @@ public class MultMenuActivity extends AppCompatActivity {
 
         Partida.document(CreationCode).collection("Equipos").
                 document("Equipo2").set(Equip);
+    }
+
+    public void buscaPartida(){
+        Partida.document(JoinCode).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String codigo = documentSnapshot.getString("Codigo");
+
+                juego = new Juego(codigo);
+            }
+        });
+    }
+
+    public void llamaEquipoActivity(){
+        Intent intent = new Intent(this, EquipoActivity.class);
+        intent.putExtra("ModeMult",mult);
+        intent.putExtra("Juego", juego);
+        startActivity(intent);
     }
 }

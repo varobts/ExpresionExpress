@@ -1,8 +1,9 @@
 package fernandez.lopez.alvaro.expresionexpress;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Juego {
+public class Juego implements Serializable{
     String Codigo, Palabra;
     int Turno;
     Date Tiempo;
