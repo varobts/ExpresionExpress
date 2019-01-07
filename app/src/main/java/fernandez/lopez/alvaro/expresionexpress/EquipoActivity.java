@@ -15,6 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +34,17 @@ public class EquipoActivity extends AppCompatActivity {
     private boolean estoy1=true; //Flag que me dice si estoy editando los parametros del equipo 1 o 2
     private boolean mult;
 
+    private Juego juego;
+
     private String R_equipo1, R_equipo2, R_participantes, R_faltaEq, R_faltaPart,R_equipo;   //Strings referenciats als recursos
+
+    //FireBase
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference Express = db.collection("ExpresionExpress");
+    private DocumentReference Partida = Express.document("Partida");
+    private DocumentReference Equip1 = Partida.collection("Equipos").document("Equipo1");
+    private DocumentReference Equip2 = Partida.collection("Equipos").document("Equipo2");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +52,7 @@ public class EquipoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_equipo);
 
         mult= getIntent().getExtras().getBoolean("ModeMult");
-
+        juego = (Juego) getIntent().getExtras().getSerializable("Juego");
 
         R_equipo1 = getResources().getString(R.string.equipo1);
         R_equipo2 = getResources().getString(R.string.equipo2);
