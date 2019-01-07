@@ -6,7 +6,7 @@ import java.util.Date;
 public class Juego implements Serializable{
     String Codigo, Palabra;
     int Turno;
-    Date Tiempo;
+    int Tiempo;
 
     public Juego(String codigo) {
         Codigo = codigo;
@@ -36,11 +36,11 @@ public class Juego implements Serializable{
         Turno = turno;
     }
 
-    public Date getTiempo() {
+    public int getTiempo() {
         return Tiempo;
     }
 
-    public void setTiempo(Date tiempo) {
+    public void setTiempo(int tiempo) {
         Tiempo = tiempo;
     }
 }

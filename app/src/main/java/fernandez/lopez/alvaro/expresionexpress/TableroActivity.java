@@ -4,18 +4,36 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import javax.annotation.Nullable;
 
 public class TableroActivity extends AppCompatActivity {
 
@@ -31,20 +49,46 @@ public class TableroActivity extends AppCompatActivity {
     private Button Pasa_btn, Tiempo_btn;
     private int jug1=0, jug2=0;
 
+    private boolean mult;
+    private String DocID;
+    private int NumEquipo;      //Aquest valor valdrà 1 si dispositiu ha "Creat" la partida
+    //i valdrà 2 si dispositiu s'ha "Unit" a la partida
+    //Per tant, aquest valor ens el dòna l'activitat anterior en
+    //l'Intent
+
     private String R_equipo1, R_equipo2, R_pos, R_turno, R_sig, R_gana, R_fin, R_repite, R_acaba; //Strings referenciats als recursos
 
-//Variable per a saber quantes paraules portem (NOMÉS en aquesta versió 0.0.2)
-    private int FiRonda=1;
+    //FireBase
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference Express = db.collection("ExpresionExpress");
+    private DocumentReference Partida;
+    private DocumentReference Equip1;
+    private DocumentReference Equip2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablero);
 
+        NumEquipo = getIntent().getExtras().getInt("NumEquipo");
+        juego = (Juego) getIntent().getExtras().getSerializable("Juego");
+        mult = getIntent().getExtras().getBoolean("ModeMult");
+        if (!mult) {
+            DocID = getIntent().getExtras().getString("ID");
+            Partida = Express.document(DocID);
+        }
+        else {
+            NumEquipo = getIntent().getExtras().getInt("NumEquipo");
+            Partida = Express.document(juego.getCodigo());
+        }
 
-        equipo1 = (Equipo) getIntent().getExtras().getSerializable("Equipo1");
-        equipo2 = (Equipo) getIntent().getExtras().getSerializable("Equipo2");
-        juego = new Juego("Codi");
+        Equip1 = Partida.collection("Equipos").document("Equipo1");
+        Equip2 = Partida.collection("Equipos").document("Equipo2");
+
+        equipo1 = new Equipo();
+        equipo2 = new Equipo();
+        rellenaEquipos();
 
         palabras = new ArrayList<>();
         indicePalabras = new ArrayList<>();
@@ -71,38 +115,267 @@ public class TableroActivity extends AppCompatActivity {
         Pasa_btn = findViewById(R.id.Pasa_btn);
         Tiempo_btn = findViewById(R.id.Tiempo_btn);
 
-        Eq1View.setText(R_equipo1 + ":\n" + equipo1.getNom());
-        Eq2View.setText(R_equipo2 + ":\n" + equipo2.getNom());
-        Pos1View.setText(R_pos + ":\n" + equipo1.getCasilla() + "/7");
-        Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
-        Turno1View.setText(R_turno + ":\n" + equipo1.getJugadors().get(jug1));
-        Turno2View.setText(R_sig + ":\n" + equipo2.getJugadors().get(jug2));
-        jug1++;
-        juego.setTurno(1);
-
-
         Pasa_btn.setEnabled(false);
         Tiempo_btn.setEnabled(true);
 
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Partida.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null){ //Evitem que deixi de funcionar la app si hi ha hagut algun error
+                    return;
+                }
+
+                juego.setPalabra(documentSnapshot.getString("Palabra"));
+                juego.setTiempo(Math.toIntExact((Long) documentSnapshot.get("Tiempo")));
+                juego.setTurno(Math.toIntExact((Long) documentSnapshot.get("Turno")));
+
+                PalabraView.setText(juego.getPalabra());
+
+                if (juego.getTiempo() == -1) {
+                    casellaSeguent();
+                    Tiempo_btn.setEnabled(true);
+                    if(equipo1.getCasilla()==7 || equipo2.getCasilla()==7) finalJoc();
+                }
+                else if (juego.getTurno() == NumEquipo && !juego.getCodigo().equals("Local")){
+                    if (equipo1.getJugadors() != null && equipo2.getJugadors() != null) {
+                        if (NumEquipo == 1) {
+                            Turno1View.setText(R_turno + ":\n" + equipo1.getJugadors().get(jug1));
+                            Turno2View.setText(R_sig + ":\n" + equipo2.getJugadors().get(jug2));
+                            jug1++;
+                            if (jug1 == equipo1.getJugadors().size()) jug1 = 0;
+                        } else {
+                            Turno1View.setText(R_sig + ":\n" + equipo1.getJugadors().get(jug1));
+                            Turno2View.setText(R_turno + ":\n" + equipo2.getJugadors().get(jug2));
+                            jug2++;
+                            if (jug2 == equipo2.getJugadors().size()) jug2 = 0;
+                        }
+                    }
+                    Pasa_btn.setEnabled(true);
+                }
+            }
+        });
+
+        Equip1.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null){
+                    return;
+                }
+
+                equipo1.setCasilla(Math.toIntExact((Long) documentSnapshot.get("Casilla")));
+                Pos1View.setText(R_pos + ":\n" + equipo1.getCasilla() + "/7");
+            }
+        });
+
+        Equip2.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null){
+                    return;
+                }
+
+                equipo2.setCasilla(Math.toIntExact((Long) documentSnapshot.get("Casilla")));
+                Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
+            }
+        });
+    }
+
+    private void rellenaEquipos() {
+        Equip1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    String NomEquip = documentSnapshot.getString("Nom");
+                    Long Casilla = (Long) documentSnapshot.get("Casilla");
+                    Long Numero = (Long) documentSnapshot.get("Num");
+
+                    List<String> jugadors = new ArrayList<>();
+                    jugadors = (List<String>) documentSnapshot.get("Jugadors");
+
+                    int Cas = Math.toIntExact(Casilla);
+                    int Nume = Math.toIntExact(Numero);
+
+                    equipo1.setNom(NomEquip);
+                    equipo1.setCasilla(Cas);
+                    equipo1.setNum(Nume);
+                    equipo1.setJugadors(jugadors);
+
+                    Eq1View.setText(R_equipo1 + ":\n" + equipo1.getNom());
+                    Pos1View.setText(R_pos + ":\n" + equipo1.getCasilla() + "/7");
+                    Turno1View.setText(R_turno + ":\n" + equipo1.getJugadors().get(jug1));
+                    jug1++;
+                    juego.setTurno(1);
+                }
+                else {
+                    Toast.makeText(TableroActivity.this, "Document does not exist 1", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("EXpress",e.toString());
+                Toast.makeText(TableroActivity.this, "Error Lectura Equipo1" + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        Equip2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    String NomEquip = documentSnapshot.getString("Nom");
+                    Long Casilla = (Long) documentSnapshot.get("Casilla");
+                    Long Numero = (Long) documentSnapshot.get("Num");
+
+                    List<String> jugadors = new ArrayList<>();
+                    jugadors = (List<String>) documentSnapshot.get("Jugadors");
+
+                    int Cas = Math.toIntExact(Casilla);
+                    int Nume = Math.toIntExact(Numero);
+
+                    equipo2.setNom(NomEquip);
+                    equipo2.setCasilla(Cas);
+                    equipo2.setNum(Nume);
+                    equipo2.setJugadors(jugadors);
+
+                    Eq2View.setText(R_equipo2 + ":\n" + equipo2.getNom());
+                    Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
+                    Turno2View.setText(R_sig + ":\n" + equipo2.getJugadors().get(jug2));
+                }
+                else {
+                    Toast.makeText(TableroActivity.this, "Document does not exist 2", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("EXpress",e.toString());
+                Toast.makeText(TableroActivity.this, "Error Lectura Equipo2" + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void actualitzaPartida() {
+
+        Map<String, Object> partida = new HashMap<>();
+
+        partida.put("Codigo", juego.getCodigo());
+        partida.put("Palabra", juego.getPalabra());
+        partida.put("Tiempo", juego.getTiempo());
+        partida.put("Turno", juego.getTurno());
+
+        Partida.update(partida).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(TableroActivity.this, "Escritura Partida Completada", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("EXpress",e.toString());
+                Toast.makeText(TableroActivity.this, "Error Escritura Partida" + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void actualitzaTiempo() {
+
+        Map <String, Object> partida = new HashMap<>();
+
+        partida.put("Tiempo", juego.getTiempo());
+
+        Partida.update(partida).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(TableroActivity.this, "Escritura Tiempo Completada", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("EXpress",e.toString());
+                Toast.makeText(TableroActivity.this, "Error Escritura Tiempo" + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void actualitzaCasella1() {
+        Map <String, Object> equipo = new HashMap<>();
+
+        equipo.put("Casilla", equipo1.getCasilla());
+
+        Equip1.update(equipo).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(TableroActivity.this, "Escritura Casilla1 Completada", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("EXpress",e.toString());
+                Toast.makeText(TableroActivity.this, "Error Escritura Casilla1" + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void actualitzaCasella2() {
+        Map <String, Object> equipo = new HashMap<>();
+
+        equipo.put("Casilla", equipo2.getCasilla());
+
+        Equip2.update(equipo).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(TableroActivity.this, "Escritura Casilla2 Completada", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("EXpress",e.toString());
+                Toast.makeText(TableroActivity.this, "Error Escritura Casilla2" + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void onClickPasa (View view){
-        //Si s'ha acabat de ronda, avança una casella a l'equip corresponent
-        /*if(FiRonda==5){
-            casellaSeguent();
-            if(equipo1.getCasilla()==7 || equipo2.getCasilla()==7) finalJoc();
-        }
-        else */
         nouTorn();
+        novaParaula();
+        if (!juego.getCodigo().equals("Local")) {   //Si estem en multijugador
+            Pasa_btn.setEnabled(false);
+        }
     }
 
     public void onClickTiempo (View view){
+        if(equipo1.getCasilla()==7 || equipo2.getCasilla()==7) {
+            finalJoc();
+            return;
+        }
+//Per a evitar que actualitzi el nom quan cliquem aquest botó
+        if (NumEquipo == 1 && juego.getTurno() == 1) {
+            jug1--;
+            if (jug1 == -1) jug1 = equipo1.getJugadors().size()-1;
+        }
+        else if (NumEquipo == 2 && juego.getTurno() == 2){
+            jug2--;
+            if (jug2 == -1) jug2 = equipo2.getJugadors().size()-1;
+        }
         Tiempo_btn.setEnabled(false);
-        novaParaula();
-        Pasa_btn.setEnabled(true);
         Random random = new Random();
         int comp1aPart = random.nextInt(61) + 20;
+        juego.setTiempo(comp1aPart);
+        novaParaula();
+        if ((!juego.getCodigo().equals("Local") && juego.getTurno() == NumEquipo) || juego.getCodigo().equals("Local")) {
+            Pasa_btn.setEnabled(true);
+        }
         final int comp2aPart = (int) (comp1aPart*0.2);
         new CountDownTimer((comp1aPart-comp2aPart)*1000, 1000) {
             ToneGenerator tone = new ToneGenerator(AudioManager.STREAM_ALARM, 75);
@@ -120,9 +393,8 @@ public class TableroActivity extends AppCompatActivity {
                     public void onFinish(){
                         //Pitidito de final
                         tone.startTone(ToneGenerator.TONE_PROP_NACK, 400);
-                        casellaSeguent();
-                        Tiempo_btn.setEnabled(true);
-                        if(equipo1.getCasilla()==7 || equipo2.getCasilla()==7) finalJoc();
+                        juego.setTiempo(-1);
+                        actualitzaTiempo();
                     }
                 }.start();
 
@@ -135,15 +407,15 @@ public class TableroActivity extends AppCompatActivity {
         Random random = new Random();
         int i = random.nextInt(indicePalabras.size());  //Se usa 'indicePalabras' porque es la que indica qué índices quedan aún por usar
         juego.setPalabra(palabras.get(indicePalabras.get(i)));  //Cogemos el índice que corresponde en 'indicePalabras'
-        PalabraView.setText(juego.getPalabra());
+        //PalabraView.setText(juego.getPalabra());
         //Para que no se repitan palabras
         indicePalabras.remove(i);
         //Cuando nos quedamos sin palabras rellenamos 'palabras' de nuevo
         if(indicePalabras.size()<1) rellenaPalabras();
+        actualitzaPartida();
     }
 
     private void nouTorn() {
-        novaParaula();
         //Canviem el torn de joc
         if (juego.getTurno() == 1) {
             juego.setTurno(2);
@@ -162,7 +434,6 @@ public class TableroActivity extends AppCompatActivity {
             jug1++;
             if (jug1 == equipo1.getJugadors().size()) jug1 = 0;
         }
-        FiRonda++;
     }
 
     private void finalJoc() {
@@ -188,14 +459,23 @@ public class TableroActivity extends AppCompatActivity {
 
     private void casellaSeguent() { //Afegir Toast indicant què passa i què fer
         if(juego.getTurno()==1) {
-            equipo2.setCasilla(equipo2.getCasilla()+1);
-            Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
+            if (equipo2.getCasilla() >= 7) {
+                equipo2.setCasilla(7);
+            }
+            else {
+                equipo2.setCasilla(equipo2.getCasilla()+1);
+            }
+            actualitzaCasella2();
         }
         else {
-            equipo1.setCasilla(equipo1.getCasilla()+1);
-            Pos1View.setText(R_pos + ":\n" + equipo1.getCasilla() + "/7");
+            if (equipo1.getCasilla() >= 7) {
+                equipo1.setCasilla(7);
+            }
+            else {
+                equipo1.setCasilla(equipo1.getCasilla() + 1);
+            }
+            actualitzaCasella1();
         }
-        FiRonda = 1;
         Pasa_btn.setEnabled(false);
     }
 
@@ -214,8 +494,9 @@ public class TableroActivity extends AppCompatActivity {
         equipo1.setCasilla(0);
         equipo2.setCasilla(0);
         juego.setTurno(1);
-        Pos1View.setText(R_pos + ":\n" + equipo1.getCasilla() + "/7");
-        Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
+        actualitzaPartida();
+        actualitzaCasella1();
+        actualitzaCasella2();
         return null;
     }
 }

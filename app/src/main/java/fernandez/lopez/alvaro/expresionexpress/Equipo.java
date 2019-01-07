@@ -8,6 +8,8 @@ public class Equipo implements Serializable {
     int Num, Casilla;
     List<String> Jugadors;
 
+    public Equipo (){}
+
     public Equipo(String nom, int num, List<String> jugadors) {
         Nom = nom;
         Num = num;

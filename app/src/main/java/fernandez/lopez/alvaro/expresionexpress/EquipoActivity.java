@@ -159,6 +159,10 @@ public class EquipoActivity extends AppCompatActivity {
     public void LlamaTableroActivity(){
         Intent intent = new Intent(this, TableroActivity.class);
         //No fem putExtra dels equips perquè els agafarem des de la firebase
+        intent.putExtra("Juego", juego);
+        intent.putExtra("ModeMult", mult);
+        if (!mult) intent.putExtra("ID", DocID);
+        else intent.putExtra("NumEquipo", NumEquipo);
         startActivity(intent);
     }
 
