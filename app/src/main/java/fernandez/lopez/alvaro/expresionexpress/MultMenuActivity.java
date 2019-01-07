@@ -9,14 +9,18 @@ import android.widget.Toast;
 
 public class MultMenuActivity extends AppCompatActivity {
 
-    EditText CodeView;
-    String CreationCode,JoinCode;
-    String R_WrongCode,R_EmptyCode;
+    private EditText CodeView;
+    private String CreationCode,JoinCode;
+    private String R_WrongCode,R_EmptyCode;
+    private boolean mult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mult_menu);
+
+        mult = getIntent().getExtras().getBoolean("ModeMult");
+
         R_WrongCode = getResources().getString(R.string.R_WrongCode);
         R_EmptyCode = getResources().getString(R.string.R_EmptyCode);
         CodeView = findViewById(R.id.CodeView);
@@ -33,7 +37,7 @@ public class MultMenuActivity extends AppCompatActivity {
         JoinCode = CodeView.getText().toString();
         if (JoinCode.equals(CreationCode)){
             Intent intent = new Intent(this, EquipoActivity.class);
-            intent.putExtra("ModeMult",true);
+            intent.putExtra("ModeMult",mult);
             startActivity(intent);
         }
         else if (JoinCode.equals("")){

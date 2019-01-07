@@ -23,7 +23,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     }
     public void OnClickMult(View view) {
         mult=true;
-        Intent intent = new Intent(this, EquipoActivity.class);
+        Intent intent = new Intent(this, MultMenuActivity.class);
         intent.putExtra("ModeMult",mult);
         startActivity(intent);
     }

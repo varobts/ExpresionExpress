@@ -14,14 +14,14 @@
             android:name=".TableroActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".InstruActivity" />
-        <activity android:name=".MultMenuActivity">
+        <activity android:name=".MenuPrincipalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuPrincipalActivity"></activity>
+        <activity android:name=".MultMenuActivity"></activity>
     </application>
 
 </manifest>

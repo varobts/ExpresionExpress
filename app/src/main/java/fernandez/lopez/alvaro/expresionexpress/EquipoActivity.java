@@ -20,7 +20,6 @@ import java.util.List;
 
 public class EquipoActivity extends AppCompatActivity {
 
-    private boolean mult;
     private static final int TABLERO = 0;
     private RecyclerView PartListView;
     private EditText NomEquipView, nomParticipantView;
@@ -29,6 +28,7 @@ public class EquipoActivity extends AppCompatActivity {
     private List<String> jugadors;
     private Adapter adapter;
     private boolean estoy1=true; //Flag que me dice si estoy editando los parametros del equipo 1 o 2
+    private boolean mult;
 
     private String R_equipo1, R_equipo2, R_participantes, R_faltaEq, R_faltaPart,R_equipo;   //Strings referenciats als recursos
 
@@ -38,6 +38,7 @@ public class EquipoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_equipo);
 
         mult= getIntent().getExtras().getBoolean("ModeMult");
+
 
         R_equipo1 = getResources().getString(R.string.equipo1);
         R_equipo2 = getResources().getString(R.string.equipo2);
