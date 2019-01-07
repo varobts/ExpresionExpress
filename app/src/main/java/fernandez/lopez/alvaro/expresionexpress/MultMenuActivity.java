@@ -25,6 +25,8 @@ public class MultMenuActivity extends AppCompatActivity {
     private String R_WrongCode,R_EmptyCode;
     private boolean mult;
 
+    private int NumEquipo;  //Aquest valor valdrà 1 si dispositiu "Crea" la partida
+                            //i valdrà 2 si dispositiu s'"Uneix" a la partida
     private Juego juego;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -52,6 +54,7 @@ public class MultMenuActivity extends AppCompatActivity {
             CodeView.setText("");
             creaPartida();
             juego = new Juego(CreationCode);
+            NumEquipo = 1;
             llamaEquipoActivity();
         }
     }
@@ -59,17 +62,14 @@ public class MultMenuActivity extends AppCompatActivity {
     public void OnClickJoin (View view){
         JoinCode = CodeView.getText().toString();
 
-        buscaPartida();
-
-        if (JoinCode.equals(CreationCode)){
-            llamaEquipoActivity();
-        }
-        else if (JoinCode.equals("")){
+        if (JoinCode.equals("")){
             Toast.makeText(this, R_EmptyCode, Toast.LENGTH_SHORT).show();
         }
-        else{
-            Toast.makeText(this, R_WrongCode, Toast.LENGTH_SHORT).show();
+        else {
+            buscaPartida();
+
         }
+
 
     }
 
@@ -109,9 +109,17 @@ public class MultMenuActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String codigo = documentSnapshot.getString("Codigo");
+                CreationCode = documentSnapshot.getString("Codigo");
 
-                juego = new Juego(codigo);
+                juego = new Juego(CreationCode);
+
+                if (JoinCode.equals(CreationCode)) {
+                    NumEquipo = 2;
+                    llamaEquipoActivity();
+                }
+                else{
+                    Toast.makeText(MultMenuActivity.this, R_WrongCode, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -120,6 +128,7 @@ public class MultMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EquipoActivity.class);
         intent.putExtra("ModeMult",mult);
         intent.putExtra("Juego", juego);
+        intent.putExtra("NumEquipo", NumEquipo);
         startActivity(intent);
     }
 }

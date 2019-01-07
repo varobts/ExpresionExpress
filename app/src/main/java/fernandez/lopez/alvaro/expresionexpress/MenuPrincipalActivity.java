@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
 
-    boolean mult=false;
+    boolean mult=false; //indica si estem en mode multijugador (true)
 
     private String DocID = "";
 
@@ -35,6 +35,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EquipoActivity.class);
         intent.putExtra("ModeMult",mult);
         intent.putExtra("Juego", juego);
+        intent.putExtra("ID", DocID);
         startActivity(intent);
     }
     public void OnClickMult(View view) {
