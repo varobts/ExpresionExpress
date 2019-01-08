@@ -15,14 +15,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MultMenuActivity extends AppCompatActivity {
 
     private EditText CodeView;
     private String CreationCode,JoinCode;
-    private String R_WrongCode,R_EmptyCode;
+    private String R_WrongCode,R_EmptyCode, R_codi_repe;
     private boolean mult;
 
     private int NumEquipo;  //Aquest valor valdrà 1 si dispositiu "Crea" la partida
@@ -41,6 +43,7 @@ public class MultMenuActivity extends AppCompatActivity {
 
         R_WrongCode = getResources().getString(R.string.R_WrongCode);
         R_EmptyCode = getResources().getString(R.string.R_EmptyCode);
+        R_codi_repe = getResources().getString(R.string.codi_repe);
         CodeView = findViewById(R.id.CodeView);
     }
 
@@ -53,9 +56,6 @@ public class MultMenuActivity extends AppCompatActivity {
         else {
             CodeView.setText("");
             creaPartida();
-            juego = new Juego(CreationCode);
-            NumEquipo = 1;
-            llamaEquipoActivity();
         }
     }
 
@@ -67,41 +67,56 @@ public class MultMenuActivity extends AppCompatActivity {
         }
         else {
             buscaPartida();
-
         }
-
-
     }
 
     public void creaPartida(){
+        Partida.document(CreationCode).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (!documentSnapshot.exists()){
+                    Map <String, Object> Joc = new HashMap<>();
+                    Map <String, Object> Equip = new HashMap<>();
 
-        Map <String, Object> Joc = new HashMap<>();
-        Map <String, Object> Equip = new HashMap<>();
+                    Joc.put("Codigo", CreationCode);
+                    Joc.put("Palabra", "");
+                    Joc.put("Tiempo", 0);
+                    Joc.put("Turno", 1);
 
-        Joc.put("Codigo", CreationCode);
-        Joc.put("Palabra", "");
-        Joc.put("Tiempo", 0);
-        Joc.put("Turno", 1);
+                    Partida.document(CreationCode).set(Joc);
 
-        Partida.document(CreationCode).set(Joc);
+                    //Creem una llista de jugadors per a què si un dels dos equips triga massa en omplir-la
+                    //no es produeixi error en passar a TableroActivity el primer equip que passi
+                    List<String> jugadors = new ArrayList<>();
+                    jugadors.add("");
+                    jugadors.add("");
 
-        Equip.put("Casilla", 0);
-        Equip.put("Jugadors", "");
-        Equip.put("Nom", "");
-        Equip.put("Num", 1);
+                    Equip.put("Casilla", 0);
+                    Equip.put("Jugadors", jugadors);
+                    Equip.put("Nom", "");
+                    Equip.put("Num", 1);
 
-        Partida.document(CreationCode).collection("Equipos").
-                document("Equipo1").set(Equip);
+                    Partida.document(CreationCode).collection("Equipos").
+                            document("Equipo1").set(Equip);
 
-        Equip = new HashMap<>();
+                    Equip = new HashMap<>();
 
-        Equip.put("Casilla", 0);
-        Equip.put("Jugadors", "");
-        Equip.put("Nom", "");
-        Equip.put("Num", 2);
+                    Equip.put("Casilla", 0);
+                    Equip.put("Jugadors", jugadors);
+                    Equip.put("Nom", "");
+                    Equip.put("Num", 2);
 
-        Partida.document(CreationCode).collection("Equipos").
-                document("Equipo2").set(Equip);
+                    Partida.document(CreationCode).collection("Equipos").
+                            document("Equipo2").set(Equip);
+                    juego = new Juego(CreationCode);
+                    NumEquipo = 1;
+                    llamaEquipoActivity();
+                }
+                else {
+                    Toast.makeText(MultMenuActivity.this, R_codi_repe, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void buscaPartida(){

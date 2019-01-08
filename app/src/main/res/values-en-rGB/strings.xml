@@ -41,6 +41,7 @@
     <string name="join">Join</string>
     <string name="R_EmptyCode">It\'s needed to introduce the game code</string>
     <string name="R_WrongCode">Wrong code</string>
+    <string name="codi_repe">Existing code, use another one</string>
 
     <!--TABLERO ACTIVITY-->
     <string name="posicion">Position</string>
@@ -51,6 +52,12 @@
     <string name="fin">GAME FINISHED</string>
     <string name="repite">Play again</string>
     <string name="acaba">Finish</string>
+    <string name="not_exist">Document does not exist</string>
+    <string name="error_lectura">Error reading Equipo</string>
+    <string name="error_escritura">Error writting</string>
+    <string name="partida">Game</string>
+    <string name="casilla">Square</string>
+    <string name="creaEquips">Click Pass when the other team has been created</string>
 
 
 

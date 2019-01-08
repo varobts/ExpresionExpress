@@ -42,6 +42,7 @@
     <string name="join">Unirse</string>
     <string name="R_EmptyCode">Falta introducir el codigo de la partida</string>
     <string name="R_WrongCode">Codigo incorrecto</string>
+    <string name="codi_repe">Código existente, utilice otro</string>
 
     <!--TABLERO ACTIVITY-->
     <string name="posicion">Posición</string>
@@ -52,6 +53,12 @@
     <string name="fin">FIN DEL JUEGO</string>
     <string name="repite">Vuelve a jugar</string>
     <string name="acaba">Acaba</string>
+    <string name="not_exist">Documento no existe</string>
+    <string name="error_lectura">Error lectura Equipo</string>
+    <string name="error_escritura">Error escritura</string>
+    <string name="partida">Partida</string>
+    <string name="casilla">Casilla</string>
+    <string name="creaEquips">Pulsa Pasa cuando se haya creado el otro equipo</string>
 
 
 
