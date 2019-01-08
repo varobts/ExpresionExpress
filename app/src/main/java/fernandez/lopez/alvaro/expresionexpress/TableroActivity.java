@@ -438,8 +438,10 @@ public class TableroActivity extends AppCompatActivity {
                     public void onFinish(){
                         DT2 = false;
                         tone = new ToneGenerator(AudioManager.STREAM_ALARM, 150);
+                        Pasa_btn.setEnabled(false);
                         tone.startTone(ToneGenerator.TONE_PROP_NACK, 400);
                         juego.setTiempo(-1);
+                        Tiempo_btn.setEnabled(true);
                         actualitzaTiempo();
                     }
                 }.start();
@@ -486,7 +488,7 @@ public class TableroActivity extends AppCompatActivity {
         //Final joc, creem un 'AlertDialog'
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (equipo1.getCasilla() == 7) builder.setMessage(R_gana + equipo1.getNom() +"!");
-        else builder.setMessage(R_gana + equipo2.getNom() +"!");
+        else builder.setMessage(R_gana + " " + equipo2.getNom() +"!");
         builder.setTitle(R_fin)
                 .setPositiveButton(R_repite, new DialogInterface.OnClickListener() {
                     @Override
@@ -497,6 +499,8 @@ public class TableroActivity extends AppCompatActivity {
                 .setNegativeButton(R_acaba, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(TableroActivity.this, MenuPrincipalActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .create()
