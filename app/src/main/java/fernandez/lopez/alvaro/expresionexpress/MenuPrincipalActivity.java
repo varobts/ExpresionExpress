@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,11 +25,41 @@ public class MenuPrincipalActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference Partida = db.collection("ExpresionExpress");
+    private Button playbutton,multbutton,instrubutton;
+    private TextView Expresionview,ExpressView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+
+        this.playbutton=findViewById(R.id.playbutton);
+        this.multbutton=findViewById(R.id.multbutton);
+        this.instrubutton=findViewById(R.id.instrubutton);
+        this.Expresionview=findViewById(R.id.ExpresionView);
+        this.ExpressView=findViewById(R.id.ExpressView);
+
+        Animation dilatacion=AnimationUtils.loadAnimation(this,R.anim.dilata);
+        dilatacion.setFillAfter(true);
+        dilatacion.setRepeatMode(Animation.REVERSE);
+
+        this.playbutton.startAnimation(dilatacion);
+        this.multbutton.startAnimation(dilatacion);
+        this.instrubutton.startAnimation(dilatacion);
+
+        Animation traslacion=AnimationUtils.loadAnimation(this,R.anim.traslacion);
+        traslacion.setFillAfter(true);
+
+
+        this.ExpressView.startAnimation(traslacion);
+
+        Animation traslacion2=AnimationUtils.loadAnimation(this,R.anim.traslacion2);
+        traslacion2.setFillAfter(true);
+
+
+        this.Expresionview.startAnimation(traslacion2);
+
     }
 
     public void OnClickPlay(View view) {
