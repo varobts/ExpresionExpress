@@ -64,7 +64,6 @@
         android:layout_marginStart="32dp"
         android:gravity="center_vertical|center_horizontal"
         android:lineSpacingExtra="8sp"
-        android:text="Equipo 2:\nTHE BEST"
         android:textColor="@color/TituloLila"
         android:textSize="22sp"
         android:textStyle="bold"

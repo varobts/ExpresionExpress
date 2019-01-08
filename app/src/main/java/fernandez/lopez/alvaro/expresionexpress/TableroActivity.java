@@ -42,6 +42,11 @@ public class TableroActivity extends AppCompatActivity {
     private Juego juego;
 
 
+    private CountDownTimer DownTimer1;
+    private CountDownTimer DownTimer2;
+    private boolean DT1 = false;
+    private boolean DT2 = false;
+
     private boolean PrimerCop = true;
 
     private List<String> palabras;
@@ -185,6 +190,9 @@ public class TableroActivity extends AppCompatActivity {
                     }
                     Pasa_btn.setEnabled(true);
                 }
+                if (juego.getTiempo() > 0) {
+                    Tiempo_btn.setEnabled(false);
+                }
             }
         });
 
@@ -213,6 +221,13 @@ public class TableroActivity extends AppCompatActivity {
                 Pos2View.setText(R_pos + ":\n" + equipo2.getCasilla() + "/7");
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (DT1) DownTimer1.cancel();
+        if (DT2) DownTimer2.cancel();
     }
 
     private void rellenaEquipos() {
@@ -406,18 +421,22 @@ public class TableroActivity extends AppCompatActivity {
             Pasa_btn.setEnabled(true);
         }
         final int comp2aPart = (int) (comp1aPart*0.2);
-        new CountDownTimer((comp1aPart-comp2aPart)*1000, 1000) {
+        DownTimer1 = new CountDownTimer((comp1aPart-comp2aPart)*1000, 1000) {
             ToneGenerator tone = new ToneGenerator(AudioManager.STREAM_ALARM, 75);
             public void onTick(long millisUntilFinished) {
                 tone.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 100);
+                DT1 = true;
             }
 
             public void onFinish() {
-                new CountDownTimer(comp2aPart*1000,500){
+                DT1 = false;
+                DownTimer2 = new CountDownTimer(comp2aPart*1000,500){
                     public void onTick(long millisUntilFinished){
                         tone.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 100);
+                        DT2 = true;
                     }
                     public void onFinish(){
+                        DT2 = false;
                         tone = new ToneGenerator(AudioManager.STREAM_ALARM, 150);
                         tone.startTone(ToneGenerator.TONE_PROP_NACK, 400);
                         juego.setTiempo(-1);

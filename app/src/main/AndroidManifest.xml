@@ -9,19 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EquipoActivity" />
+        <activity
+            android:name=".EquipoActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TableroActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".InstruActivity" />
-        <activity android:name=".MenuPrincipalActivity">
+        <activity
+            android:name=".MenuPrincipalActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MultMenuActivity"></activity>
+        <activity
+            android:name=".MultMenuActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
